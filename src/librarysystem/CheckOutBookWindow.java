@@ -24,7 +24,6 @@ import business.SystemController;
 
 public class CheckOutBookWindow extends JPanel implements LibWindow {
 	public static final CheckOutBookWindow INSTANCE = new CheckOutBookWindow();
-    ControllerInterface ci = new SystemController();
 	private boolean isInitialized = false;
 	public JPanel getMainPanel() {
 		return mainPanel;
@@ -36,7 +35,7 @@ public class CheckOutBookWindow extends JPanel implements LibWindow {
 	private TextArea textArea;
 	private JTextField memberIDText;
 	private JTextField isbnText;
-//	private JLabel resultLabel;
+
 	
 	
 	private CheckOutBookWindow() {
@@ -73,7 +72,7 @@ public class CheckOutBookWindow extends JPanel implements LibWindow {
 	    memberIDText = new JTextField(11);
 	    isbnText = new JTextField(11);
 	    JButton checkoutButton = new JButton("CheckOut");
-	    SystemController sc = new SystemController();
+	    SystemController systemController = new SystemController();
 	    checkoutButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -81,14 +80,13 @@ public class CheckOutBookWindow extends JPanel implements LibWindow {
 				String memberID = memberIDText.getText();
 				String isbnString = isbnText.getText();
 				try {
-					sc.checkOutBook(memberID, isbnString);
-//					resultLabel.setText("");
+					systemController.checkOutBook(memberID, isbnString);
+
 					JOptionPane.showMessageDialog(CheckOutBookWindow.this,
 							"Checkout successful!");
-//					resultLabel.setText(String.format("Member %s has checked out book: %s", memberID, sc.getBookName(isbnString)));
+
 					clearJTextFields();
 				} catch (LibrarySystemException lse) {
-//					errorLabel.setText(lse.getMessage());
 					JOptionPane.showMessageDialog(CheckOutBookWindow.this,
 							lse.getMessage());
 				}
@@ -100,11 +98,7 @@ public class CheckOutBookWindow extends JPanel implements LibWindow {
 	    middlePanel.add(memberIDText);
 	    middlePanel.add(isbn);
 	    middlePanel.add(isbnText);
-	    middlePanel.add(checkoutButton); 
-	    
-//	    resultLabel = new JLabel(); 
-//	    resultLabel.setForeground(Color.BLUE); 
-//	    middlePanel.add(resultLabel); 
+	    middlePanel.add(checkoutButton);
 	}
 
 
@@ -120,7 +114,7 @@ public class CheckOutBookWindow extends JPanel implements LibWindow {
 		lowerPanel.setLayout(fl);
 		JButton backButton = new JButton("<== Back to Main");
 		addBackButtonListener(backButton);
-//		lowerPanel.add(backButton);
+
 	}
 	
 	public void setData(String data) {

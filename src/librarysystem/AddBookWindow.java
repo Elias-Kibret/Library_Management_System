@@ -26,7 +26,7 @@ import business.SystemController;
 public class AddBookWindow extends JPanel implements LibWindow{
 
     public static final AddBookWindow INSTANCE = new AddBookWindow();
-    SystemController ci = new SystemController();
+    SystemController systemController = new SystemController();
     
     private boolean isInitialized = false;
     
@@ -70,10 +70,6 @@ public class AddBookWindow extends JPanel implements LibWindow{
 		setBounds();
 		addComponents();
 		addEventListeners();
-		
-		
-//    		Add listeners
-//		addBookListener(addBookButton);
 		add(mainPanel);
 		isInitialized(true);
 		setSize(621, 450);
@@ -91,7 +87,6 @@ public class AddBookWindow extends JPanel implements LibWindow{
 	}
 	
 	private void constructComponents() {
-        //construct components
         isbnTextField = new JTextField (8);
         isbnLabel = new JLabel ("ISBN");
         titleField = new JTextField (5);
@@ -130,8 +125,6 @@ public class AddBookWindow extends JPanel implements LibWindow{
         add (isbnLabel);
         add (titleField);
         add (titleLabel);
-//        add (checkoutDayDurationField);
-//        add (checkoutDayDurationLabel);
         add (checkoutDay);
         add (checkoutDayLabel);
         add (authorField);
@@ -139,27 +132,17 @@ public class AddBookWindow extends JPanel implements LibWindow{
         add (addLibraryMemberHeadingLabel);
         add (addBookButton);
         add (copiesUnitTextField);
-//        add (cityTextField);
-//        add (addressLabel);
         add (copiesUnitLabel);
-//        add (cityLabel);
-//        add (stateLabel);
-//        add (stateTextField);
-//        add (zipcodeTextField);
-//        add (zipCodeLabel);
         add (addAuthorButton);
-//        add (authorList);10310
         add(authorListScroller);
     }
 	
 	private void setBounds() {
-        //set component bounds (only needed by Absolute Positioning)
         isbnTextField.setBounds (125, 110, 145, 25);
         isbnLabel.setBounds (45, 110, 65, 25);
         titleField.setBounds (390, 110, 140, 25);
         titleLabel.setBounds (315, 110, 100, 25);
-//        checkoutDayDurationField.setBounds (125, 165, 145, 25);
-//        checkoutDayDurationLabel.setBounds (45, 165, 100, 25);
+
         checkoutDay.setBounds(125, 165, 145, 25);
         checkoutDayLabel.setBounds(45, 165, 100, 25);
         authorField.setBounds (390, 170, 145, 25);
@@ -168,15 +151,10 @@ public class AddBookWindow extends JPanel implements LibWindow{
         addBookButton.setBounds (270, 355, 115, 30);
         
         cityTextField.setBounds (390, 260, 145, 25);
-//        addressLabel.setBounds (270, 215, 100, 25);
+
         copiesUnitTextField.setBounds (125, 195, 145, 50);
         copiesUnitLabel.setBounds (50, 200, 100, 25);
-//        cityLabel.setBounds (325, 255, 100, 25);
-//        stateLabel.setBounds (50, 310, 100, 25);
-//        stateTextField.setBounds (125, 310, 145, 25);
-//        zipcodeTextField.setBounds (390, 315, 150, 25);
-//        zipCodeLabel.setBounds (320, 315, 100, 25);
-//        addAuthorButton.setBounds (270, 215, 45, 30);
+
         authorList.setBounds (200, 250, 185, 50);
         authorListScroller.setBounds (390, 200, 145, 50);
         
@@ -197,19 +175,18 @@ public class AddBookWindow extends JPanel implements LibWindow{
         });
         
         addBookButton.addActionListener(e->{
-				// TODO Auto-generated method stub
+
 				List<String> authorArrayList = new ArrayList<>();
 		        for(int i = 0; i< authorList.getModel().getSize();i++){
 		        	authorArrayList.add((String) authorList.getModel().getElementAt(i));
 		        }
 		        
 		        try {
-					ci.addBook(isbnTextField.getText(), titleField.getText(), authorArrayList, checkoutDay.getSelectedItem().toString(),copiesUnitTextField.getText());
+                    systemController.addBook(isbnTextField.getText(), titleField.getText(), authorArrayList, checkoutDay.getSelectedItem().toString(),copiesUnitTextField.getText());
 					clearFields();
 					AllBookIdsWindow.INSTANCE.reloadBooks();
 					JOptionPane.showMessageDialog(this,"Book has been added successfully");
 				} catch (LibrarySystemException e1) {
-					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(this,e1.getMessage());
 				}
 		});
@@ -222,9 +199,6 @@ public class AddBookWindow extends JPanel implements LibWindow{
 		DefaultListModel listModel= (DefaultListModel)authorList.getModel();
 		listModel.removeAllElements();
 		copiesUnitTextField.setText("");
-//		cityTextField.setText("");
-//		stateTextField.setText("");
-//		zipcodeTextField.setText("");
 	}
 	
 	
