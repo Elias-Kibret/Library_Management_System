@@ -71,7 +71,7 @@ public class AddBookCopyWindow extends JPanel implements LibWindow{
 
 
 		JButton addbookCopyButton = new JButton("Add Copy");
-		SystemController sc = new SystemController();
+		SystemController systemController = new SystemController();
 		addbookCopyButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -80,7 +80,7 @@ public class AddBookCopyWindow extends JPanel implements LibWindow{
 				String numCopiesStr = totalCopyField.getText().trim();
 				int numCopies;
 				if(isbn.equals("") || numCopiesStr.equals("")) {
-//					errorLabel.setText("Fields cannot be empty!");
+
 					JOptionPane.showMessageDialog(AddBookCopyWindow.INSTANCE,"Fields cannot be empty!");
 					return;
 				}
@@ -92,19 +92,19 @@ public class AddBookCopyWindow extends JPanel implements LibWindow{
 					}
 				}
 				catch(NumberFormatException ex) {
-//					errorLabel.setText("Number of copies must be an integer");
+
 					JOptionPane.showMessageDialog(AddBookCopyWindow.INSTANCE,"Number of copies must be an integer");
 					return;
 				}
 				try {
-					sc.addBookCopy(isbn, numCopies);
+					systemController.addBookCopy(isbn, numCopies);
 					clearFields();
 					JOptionPane.showMessageDialog(AddBookCopyWindow.INSTANCE,"Added book copy successfully!");
 					clearFields();
 					AllBookIdsWindow.INSTANCE.reloadBooks();
-//					errorLabel.setText("add book copy successfully");
+
 				} catch (LibrarySystemException lse) {
-//					errorLabel.setText(lse.getMessage());
+
 					JOptionPane.showMessageDialog(AddBookCopyWindow.INSTANCE,lse.getMessage());
 				}
 			}
@@ -131,7 +131,7 @@ public class AddBookCopyWindow extends JPanel implements LibWindow{
 		lowerPanel.setLayout(fl);
 		JButton backButton = new JButton("<== Back to Main");
 		addBackButtonListener(backButton);
-//		lowerPanel.add(backButton);
+
 	}
 
 	public void setData(String data) {

@@ -218,8 +218,7 @@ public class SystemController implements ControllerInterface {
 		
 		if(Integer.parseInt(bookCopiesUnit)>1)
 		addBookCopy(isbn, Integer.parseInt(bookCopiesUnit)-1);
-//		da.saveBook(book);
-//		System.out.println("Congrats");
+
 
 	}
 
