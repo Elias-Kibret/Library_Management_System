@@ -29,7 +29,7 @@ import business.SystemController;
 
 public class AddNewLibraryMemberWindow extends JPanel implements LibWindow {
     public static final AddNewLibraryMemberWindow INSTANCE = new AddNewLibraryMemberWindow();
-    SystemController ci = new SystemController();
+    SystemController systemController = new SystemController();
     
 	private boolean isInitialized = false;
 	
@@ -179,7 +179,7 @@ public class AddNewLibraryMemberWindow extends JPanel implements LibWindow {
     	private void addLibraryMemberListener(JButton butn) {
     		butn.addActionListener(evt -> {
     			try {
-					ci.addNewLibraryMember(firstNameTextField.getText(), lastNameField.getText(), memberIdField.getText(), telephoneField.getText(),streetTextField.getText(), cityTextField.getText(), stateTextField.getText(), zipcodeTextField.getText());
+                    systemController.addNewLibraryMember(firstNameTextField.getText(), lastNameField.getText(), memberIdField.getText(), telephoneField.getText(),streetTextField.getText(), cityTextField.getText(), stateTextField.getText(), zipcodeTextField.getText());
 					JOptionPane.showMessageDialog(AddNewLibraryMemberWindow.this,"New member added successfully");
 					AllMemberIdsWindow.INSTANCE.reloadMember();
 					clearFields();

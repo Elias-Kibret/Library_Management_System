@@ -60,19 +60,6 @@ public class CheckoutRecordWindow extends JPanel implements LibWindow {
 		mainPanel.add(lowerPanel, BorderLayout.SOUTH);
 		add(mainPanel);
 		isInitialized = true;
-//		mainPanel = new JPanel();
-//		mainPanel.setLayout(null);
-//		
-//		constructComponents();
-//		setBounds();
-//		addComponents();
-//		
-//		
-////    		Add listeners
-//		addLibraryMemberListener(addMemberButton);
-//		add(mainPanel);
-//		isInitialized(true);
-//		setSize(621, 450);
 	}
 
 	public void defineTopPanel() {
