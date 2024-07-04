@@ -155,7 +155,7 @@ public class SystemController implements ControllerInterface {
 	}
 	
 	public void addBook(String isbn, String title,List<String> authorList,String borrowDays,String bookCopiesUnit) throws LibrarySystemException {
-		if (borrowDays.trim().isEmpty() || isbn.trim().isEmpty() || title.trim().isEmpty() || authorList.size()<=0) {
+		if (borrowDays.trim().isEmpty() || isbn.trim().isEmpty() || title.trim().isEmpty() ) {
 			throw new LibrarySystemException("All fields must be non-empty!");
 		}
 

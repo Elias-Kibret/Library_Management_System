@@ -182,11 +182,13 @@ public class AddBookWindow extends JPanel implements LibWindow{
 		        }
 		        
 		        try {
+
                     systemController.addBook(isbnTextField.getText(), titleField.getText(), authorArrayList, checkoutDay.getSelectedItem().toString(),copiesUnitTextField.getText());
 					clearFields();
 					AllBookIdsWindow.INSTANCE.reloadBooks();
 					JOptionPane.showMessageDialog(this,"Book has been added successfully");
 				} catch (LibrarySystemException e1) {
+
 					JOptionPane.showMessageDialog(this,e1.getMessage());
 				}
 		});

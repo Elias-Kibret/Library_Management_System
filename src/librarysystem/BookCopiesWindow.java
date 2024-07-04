@@ -36,7 +36,6 @@ import business.SystemController;
 
 public class BookCopiesWindow extends JPanel implements LibWindow {
 	public static final BookCopiesWindow INSTANCE = new BookCopiesWindow();
-	SystemController ci = new SystemController();
 
 	private JPanel mainPanel;
 	private JPanel topPanel;
@@ -81,7 +80,6 @@ public class BookCopiesWindow extends JPanel implements LibWindow {
 		JLabel ISBN = new JLabel("ISBN");
 		ISBNText = new JTextField(11);
 		JButton showCopiesButton = new JButton("Show Book Copies");
-		SystemController sc = new SystemController();
 		showCopiesButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -110,7 +108,7 @@ public class BookCopiesWindow extends JPanel implements LibWindow {
 	}
 
 	private void showBookCopiesRecord(String ISBN) throws LibrarySystemException {
-		// Use JTable to render member’s checkout records
+
 		
 		SystemController sc = new SystemController();
 		List<BookCopy> bookCopyList = null;
@@ -122,8 +120,7 @@ public class BookCopiesWindow extends JPanel implements LibWindow {
 			JOptionPane.showMessageDialog(this,e.getMessage());
 			
 		}
-//		CheckoutRecord checkoutRecord = sc.getMemberCheckoutRecord(ISBN);
-//		List<CheckoutRecordEntry> entries = checkoutRecord.getCheckoutRecordEntries();
+
 		DefaultTableModel model = new DefaultTableModel();
 		model.addColumn("ISBN");
 		model.addColumn("Title");
