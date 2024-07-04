@@ -119,9 +119,26 @@ The login sequence for the Library Management System involves several interactio
 - **Error Handling:** If any required fields are left blank or if there are validation errors (e.g., invalid zip code format), the system will prompt you with appropriate error messages.
 - **Feedback:** Your feedback is valuable to us! If you encounter any issues or have suggestions for improving the system, please feel free to contact our support team.
 
+# Checkout Process Sequence Diagram
 
-## Getting Started
+This sequence diagram illustrates the process of checking out a book in a library management system. It shows how user interaction triggers backend operations to validate and process a book checkout.
 
-To run the application:
+## Actors:
+- **User/Customer**: Initiates the checkout process by interacting with the checkout interface.
 
-1. Clone the repository:
+## Components:
+- **CheckOutBookWindow**: Graphical interface where users input member ID and book ISBN to initiate checkout.
+- **SystemController**: Coordinates the checkout process by interacting with data access and business logic layers.
+- **DataAccess**: Handles data retrieval and storage operations (searching for members and books, saving member data).
+- **Book**: Represents the book being checked out.
+- **LibraryMember**: Represents the library member performing the checkout.
+
+## Sequence of Operations:
+1. **User** triggers the checkout process by interacting with the `CheckOutBookWindow`.
+2. `CheckOutBookWindow` forwards user inputs (`memberID` and `isbnString`) to `SystemController`.
+3. `SystemController` verifies the existence of the `LibraryMember` by calling `DataAccess.searchMember(memberID)`.
+4. If the member is found, `SystemController` searches for the book using `DataAccess.searchBook(isbnString)`.
+5. Upon finding the book, `SystemController` retrieves the next available copy using `Book.getNextAvailableCopy()`.
+6. `SystemController` then assigns the copy to the `LibraryMember` using `LibraryMember.checkout(copy, checkoutDate, dueDate)` and updates the database via `DataAccess.saveNewMember(libraryMember)` and `DataAccess.saveBook(book)`.
+7. Finally, `SystemController` notifies the `CheckOutBookWindow` of successful checkout, which then clears input fields.
+   ![Login Sequence Diagram](src/Image/CheckoutBookWindow.png)
